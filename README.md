@@ -1,2 +1,2 @@
-# Tiktok
-based on Kitex and Hertz by ByteDance's CloudWeGo.
+# X_BUY
+to be continued..
