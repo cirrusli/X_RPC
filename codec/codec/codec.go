@@ -15,7 +15,7 @@ type Codec interface {
 	ReadBody(any) error
 	Write(*Header, any) error
 }
-type NewCoderFunc func(closer io.ReadWriteCloser) Codec
+type NewCodecFunc func(closer io.ReadWriteCloser) Codec
 
 type Type string
 
@@ -24,10 +24,10 @@ const (
 	JsonType Type = "application/json"
 )
 
-var NewCoderFuncMap map[Type]NewCoderFunc
+var NewCodecFuncMap map[Type]NewCodecFunc
 
 func init() {
-	NewCoderFuncMap = make(map[Type]NewCoderFunc)
-	NewCoderFuncMap[GobType] = NewGobCodec
+	NewCodecFuncMap = make(map[Type]NewCodecFunc)
+	NewCodecFuncMap[GobType] = NewGobCodec
 
 }

@@ -7,6 +7,8 @@ import (
 	"log/slog"
 )
 
+var logger = slog.With("module", "x_rpc/codec")
+
 type GobCodec struct {
 	conn io.ReadWriteCloser
 	buf  *bufio.Writer
@@ -43,11 +45,11 @@ func (c *GobCodec) Write(h *Header, body any) (err error) {
 		}
 	}()
 	if err = c.enc.Encode(h); err != nil {
-		slog.Info("rpc codec: gob error encoding header:", err)
+		logger.Info("rpc codec: gob error encoding header:", err)
 		return err
 	}
 	if err = c.enc.Encode(body); err != nil {
-		slog.Info("rpc codec: gob error encoding body:", err)
+		logger.Info("rpc codec: gob error encoding body:", err)
 		return err
 	}
 	return nil
